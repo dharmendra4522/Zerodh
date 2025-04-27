@@ -44,10 +44,10 @@ function Stats() {
 
           <div className="text-center">
             <a href="" className="mx-5" style={{ textDecoration: "none" }}>
-              Explore our product <i class="fa-solid fa-arrow-right"></i>
+              Explore our product <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
             </a>
             <a href="/#" style={{ textDecoration: "none" }}>
-              Try kite demo <i class="fa-solid fa-arrow-right"></i>
+              Try kite demo <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
         </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 function Hero() {
   return (
     <div className="container p-5  mt-5">
       <div className="row text-center">
         <img
-          src="media\assets\homeHero.png"
+          src="media\images\homeHero.png"
           alt="Hero Image"
           className="mb-5"
           style={{ width: "70%", margin: "0 auto" }}
@@ -26,7 +27,7 @@ function Hero() {
             borderRadius: "3px",
           }}
         >
-           <Link to={"https://zerodha-di09.onrender.com/signup"} style={{textDecoration:"none",color:"white"}}>Sign up for free</Link>  
+           <Link to={"/signup"} style={{textDecoration:"none",color:"white"}}>Sign up for free</Link>  
         </button>
       </div>
     </div>

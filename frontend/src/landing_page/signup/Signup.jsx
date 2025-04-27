@@ -115,7 +115,7 @@ const Signup = () => {
             </form>
             <div className="mt-3 text-center">
               Already have an account?{" "}
-              <Link to={"https://www.google.com/"}>Login</Link>
+              <Link to={"https://www.google.com/"} style={{textDecoration:"none"}}>Login</Link>
             </div>
           </div>
         </div>

@@ -1,32 +1,39 @@
-const User = require("../model/UserModel");
+const User = require("../models/UserModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 module.exports.userVerification = async (req, res, next) => {
-    const token = req.cookies.token;
-    console.log("Token recieved ", token);
+  const token = req.cookies.token;
+  console.log("Token received:", token);
 
-    if(!token){
-        console.log(res);
-        return res.status(401).json({status: false, message: "No token Provided"});
+  if (!token) {
+    return res.status(401).json({ status: false, message: "No token provided" });
+  }
+
+  // Verifying token
+  jwt.verify(token, process.env.TOKEN_KEY, async (err, decoded) => {
+    if (err) {
+      console.error("JWT verification failed:", err);
+      return res.status(403).json({ status: false, message: "Invalid or expired token" });
     }
 
-    jwt.verify(token, process.env.TOKEN_KEY, async (err, decoded) => {
-        if(err){
-            console.error("JWT verification failed", err);
-            
-            return res.status(401).json({status: false, message: "Invalid  or Expired token"});
+    console.log("Decoded token:", decoded);
 
-        }
-        console.log("Decoded token", decoded);
-        const user = await User.findById(decoded.id);
-        console.log("currentUser", user);
-        if(!user){
-            return res.status(401).json({status: false, message: "User not found"});
-        }
+    try {
+      const user = await User.findById(decoded.id);
+      console.log("Current User:", user);
 
-        req.userId = user._id;
-        req.username = user.username;
-        next();
-    });
+      if (!user) {
+        return res.status(404).json({ status: false, message: "User not found" });
+      }
+
+      req.userId = user._id;
+      req.username = user.username;
+
+      next(); // Proceed to the next middleware
+    } catch (error) {
+      console.error("Error finding user:", error);
+      return res.status(500).json({ status: false, message: "Server error" });
+    }
+  });
 };

@@ -21,7 +21,7 @@ function OpenAccount() {
             borderRadius: "3px",
           }}
         >
-        <Link to={"https://zerodha-di09.onrender.com/signup"} style={{textDecoration:"none",color:"white"}}>Sign up for free</Link>  
+        <Link to={"/signup"} style={{textDecoration:"none",color:"white"}}>Sign up for free</Link>  
         </button>
       </div>
     </div>

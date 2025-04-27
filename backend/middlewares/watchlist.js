@@ -18,6 +18,7 @@ module.exports.WatchlistUser = (req, res, next) => {
                 req.userId = user._id; //Attach userId to request object
                 //optionally attach other user data if needed
                 //Proceed to the next middleware/route handler
+                
             } 
             else{
                 return res.json({ status: false });
