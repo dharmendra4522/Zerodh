@@ -93,10 +93,17 @@ const Menu = () => {
         <div className="profile" onClick={handleProfileClick}>
           <div className="avatar">ZU</div>
           <p className="username">USERID</p>
+          <Link
+            style={{ textDecoration: "none" }}
+            to="/Login"/>
+          
         </div>
       </div>
     </div>
   );
 };
+
+
+
 
 export default Menu;

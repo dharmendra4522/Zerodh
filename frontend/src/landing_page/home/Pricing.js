@@ -1,34 +1,42 @@
 import React from 'react';
 
-function Pricing() {
-    return (
-        <div className='container mb-5'>
-            <div className='row'>
-                <div className='col-4'>
-                    <h1 className='mb-3 fs-2'>Unbeatable pricing</h1>
-                    <p>We pioneered the concept of discount broking and price transparency in India. Flat fees and no hidden charges.</p>
-                    <a href='#' className='mx-5' style={{ textDecoration: "none" }}>See Pricing <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                </div>
-                <div className='col-2'></div>
-                <div className='col-6 mb-5'>
-                    <div className='row text-center'>
-                        <div className='col p-3 border'>
-                            <h1 className='mb-3' >₹0</h1>
-                            <p> Free equity delivery
-                                and <br/>direct mutual funds</p>
-                        </div>
-                        <div className='col p-3 border'>
-                            <h1 className='mb-3'>₹20</h1>
-                            <p> Intraday and
-                                F&O
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+function Pricing() {
+    return (  
+        <div className="container p-5">
+          <div className="row  p-5">
+            <div className="col-5 mt-5">
+              <h2>Unbeatable pricing</h2>
+              <p className='text-muted'>
+                We pioneered the concept of discount broking and price <br/>transparency
+                in India. Flat fees and no hidden charges.
+              </p>
+              <a href="/pricing"  style={{textDecoration:"none" }}>See pricing <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div className="col-7 pricing-img ">
+              <div className=" col-4 pricing-box">
+                <div className='img-p-style'>
+                <img src="media\assets\pricing-eq.svg" alt="" style={{width:"50%"}}/>
+                <p className='text-muted ' style={{fontSize:"10px",alignSelf:"flex-end"}}>Free account<br/>opening</p>
+              </div>
+              </div>
+              <div className="col-4 pricing-box">
+                <div className='img-p-style'>
+                <img src="media\assets\pricing0.svg" alt=""  style={{width:"50%"}}/>
+                <p className='text-muted ' style={{fontSize:"10px",alignSelf:"flex-end"}}>Free equity delivery<br/>and direct mutual funds</p>
+              </div>
+              </div>
+              <div className=" col-4 pricing-box">
+                <div className='img-p-style'>
+                <img src="media\assets\other-trades.svg" alt=""  style={{width:"50%"}} />
+                <p className='text-muted ' style={{fontSize:"10px",alignSelf:"flex-end"}}>Intraday and<br/>F&amp;O</p>
+                </div>
+              </div>
+            </div>
+          </div>
+         
         </div>
-    );
+       ); 
 }
 
-export default Pricing;
+export default Pricing ;

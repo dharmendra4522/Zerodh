@@ -1,6 +1,11 @@
 import React from "react";
 
-function RightSection({ imageURL, productName, productDesription, learnMore }) {
+function RightSection({
+  imageURL,
+  productName,
+  productDesription,
+  learnMore
+}) {
   return (
     <div className="container mt-5">
       <div className="row">
@@ -8,7 +13,7 @@ function RightSection({ imageURL, productName, productDesription, learnMore }) {
           <h1>{productName}</h1>
           <p>{productDesription}</p>
           <div>
-            <a href={learnMore} style={{textDecoration:"none"}}>Learn More</a>
+            <a href={learnMore} style={{ textDecoration: "none" }}>Learn More</a>
           </div>
         </div>
         <div className="col-6">

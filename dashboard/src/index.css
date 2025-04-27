@@ -683,7 +683,7 @@ hr {
   align-items: center;
   justify-content: space-between;
   font-weight: 300;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   position: relative;
 }
 
@@ -756,7 +756,13 @@ hr {
 
 .icon {
   transform: scale(0.7);
-  color: rgb(65, 65, 65);
+  color: grey;
+  margin-bottom: -10px;
+}
+.iconGreen {
+  transform: scale(0.7);
+  color: green;
+  margin-bottom: -10px;
 }
 
 .watchlist-number {
@@ -841,3 +847,91 @@ hr {
 .action:hover {
   background-color: rgb(212, 212, 212);
 }
+
+.form_container {
+  background-color: #fff;
+  padding: 2rem 3rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+}
+
+.form_container > h2 {
+  margin-block: 1rem;
+  padding-block: 0.6rem;
+  color: rgba(0, 212, 255, 1);
+}
+
+.form_container > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.form_container div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form_container input {
+  border: none;
+  padding: 0.5rem;
+  border-bottom: 1px solid gray;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.form_container input::placeholder {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.form_container button {
+  background-color: rgba(0, 212, 255, 1);
+  color: #fff;
+  border: none;
+  padding: 0.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+}
+
+span a {
+  text-decoration: none;
+  color: rgba(0, 212, 255, 1);
+}
+
+.signupContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 9rem;
+}
+.featuredAlert{
+  margin-bottom: 3rem;
+}
+.featureAlertUl{
+  position: relative;
+  right: 15px;
+}
+.featuredAlert h5{
+  position: relative;
+  bottom: 5px;
+}
+
+.welcomeUser{
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  border-radius: 50%;
+
+}
+.welcomeUser h5 {
+ /* vertical-align: text-top; */
+ text-align: center;
+ position:relative;
+ bottom:17px;
+}
+ 

@@ -2,33 +2,77 @@ import React from "react";
 
 function Hero() {
   return (
-    <section className="container-fluid" id="supportHero">
-      <div className="p-5 " id="supportWrapper">
-        <h4>Support Portal</h4>
-        <a href="">Track Tickets</a>
+    <section
+      className="container-fluid mt-5"
+      style={{ backgroundColor: "#387ed1", height: "470px" }}
+    >
+      <div className="p-5  " id="supperHeroWrapper">
+        <h5>Support Portal</h5>
+
+        <a href=""> Track tickets</a>
       </div>
-      <div className="row p-5 m-3">
-        <div className="col-6 p-3">
-          <h2 className="fs-3">
-            Search for an answer or browse help topics to create a ticket
-          </h2>
-          <input placeholder="Eg. how do I activate F&O" />
-          <br />
-          <a href="">Track account opening</a> &nbsp; &nbsp;
-          <a href="">Track segment activation</a> &nbsp; &nbsp;
-          <a href="">Intraday margins</a> <br/> <br/>
-          <a href="">Kite user manual</a>
+      <div className="row  " id="heroInfo">
+        <div className="col-7 p-2 ">
+          <h5>Search for an answer or browse help topics to create a <br/>ticket</h5>
+
+          <div style={{ display: "flex" }} className="mt-5">
+            <input
+              placeholder="Eg : How do i activated F & O,Why is my order getting rejected ..."
+              style={{
+                width: "600px",
+                height: "55px",
+                border: "none",
+                borderRadius: "5px",
+              }}
+              className="p-3"
+            />
+            <i
+              class="fa-solid fa-magnifying-glass"
+              style={{
+                height: "55px",
+                display: "inline-flex",
+                alignItems: "center",
+                backgroundColor: "white",
+                color: "#666666",
+                borderRadius: "3px",
+              }}
+            ></i>
+          </div>
+          <div className="supportHeroanchor mt-3 ">
+            <p>
+              <a href="">Track account opening</a>
+            </p>
+            <p>
+              <a href="">Track Segment activation</a>
+            </p>
+            <p>
+              <a href="" className="">
+                Intraday Margine
+              </a>{" "}
+            </p>
+          </div>
+          <div className="KiteAnchorTagStyling ">
+            <p>
+              <a href="" style={{textDecoration:"none"}}>Kite users manual</a>
+            </p>
+          </div>
         </div>
-        <div className="col-6 p-3">
-          <h1 className="fs-3">Featured</h1>
-          <ol>
-            <li>
-              <a href="">Current Takeovers and Delisting - January 2024</a>
-            </li> <br/>
-            <li>
-              <a href="">Latest Intraday leverages - MIS & CO</a>
-            </li>
-          </ol>
+        <div className="col-5 featuredAlert">
+      
+          <h5 className="">Featured</h5>
+         
+           <p> Due to the settlement holiday on Monday,your account balance will
+            not include the following credits on 16 September, 2024:</p>
+            <ul className="featureAlertUl">
+            <li>Intraday
+            profits made in the Equity segment on Sept 13, 2024.</li> 
+            
+            <li>Credits from
+            trades made in NFO, Currency, and Commodity derivatives on Sept 13,
+            2024. 
+           This will include options premium credits, futures M2M
+            profits, etc. Read more.</li> 
+          </ul>
         </div>
       </div>
     </section>

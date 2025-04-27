@@ -1,31 +1,65 @@
-import React from 'react';
+import React from "react";
 
 function Stats() {
-    return (
-        <div className="container p-3">
-            <div className="row p-5">
-                <div className="col-6 p-5">
-                    <h1 className='fs-2 mb-5'>Trust With confidence</h1>
-                    <h2 className='fs-4'>Customer-first always</h2>
-                    <p className='text-mutted'>That's why 1.5+ crore customers trust Zerodha with ₹4.5+ lakh crores of equity investments and contribute to 15% of daily retail exchange volumes in India.</p>
-                    <h2 className='fs-4'>No spam or gimmicks</h2>
-                    <p className='text-mutted'>No gimmicks, spam, "gamification", or annoying push notifications. High quality apps that you use at your pace, the way you like.</p>
-                    <h2 className='fs-4'>The Zerodha universe</h2>
-                    <p className='text-mutted'>Not just an app, but a whole ecosystem. Our investments in 30+ fintech startups offer you tailored services specific to your needs.</p>
-                    <h2 className='fs-4'>Do better with money</h2>
-                    <p className='text-mutted'>With initiatives like Nudge and Kill Switch, we don't just facilitate transactions, but actively help you do better with your money.</p>
-                </div>
-                <div className="col-6 p-5">
-                    <img style={{ width: "90%" }} src='media/images/ecosystem.png' alt='ecosystemImage' />
-                    <div className='text-center'>
-                        <a href='#' className='mx-5' style={{textDecoration: "none"}}>Explor our products <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                        <a href='#' style={{textDecoration: "none"}}>Try Kite demo</a>
-                    </div>
+  return (
+    <div className="container">
+      <div className="row ">
+        <div
+          className="col-6 p-5 "
+          style={{ position: "relative", left: "50px" }}
+        >
+          <h1 className="mb-5 " style={{ fontSize: "32px" }}>
+            Trust with confidence
+          </h1>
+          <h2 className="fs-5 text-muted">Customer-first always</h2>
+          <p className="text-muted mb-3">
+            That's why 1.5+ crore customers trust Zerodha with
+            <br /> ₹4.5+ lakh crores of equity investments and contribute to{" "}
+            <br /> 15% of daily retail exchange volumes in India.
+          </p>
 
-                </div>
-            </div>
+          <h2 className="fs-5 text-muted">No spam or gimmicks</h2>
+          <p className="text-muted mb-3">
+            No gimmicks, spam, "gamification", or annoying push <br />{" "}
+            notifications. High quality apps that you use at your <br /> pace,
+            the way you like.
+          </p>
+
+          <h2 className="fs-5 text-muted">The Zerodha universe</h2>
+          <p className="text-muted mb-3">
+            Not just an app, but a whole ecosystem. Our investments <br /> in
+            30+ fintech startups offer you tailored services <br /> specific to
+            your needs.
+          </p>
+
+          <h2 className="fs-5 text-muted"> Do better with money</h2>
+          <p className="text-muted mb-3">
+            With initiatives like Nudge and Kill Switch, we don't just <br />{" "}
+            facilitate transactions, but actively help you do better <br /> with
+            your money.
+          </p>
         </div>
-    );
+        <div className="col-6">
+          <img src="media\images\ecosystem.png" style={{ width: "90%" }} />
+
+          <div className="text-center">
+            <a href="" className="mx-5" style={{ textDecoration: "none" }}>
+              Explore our product <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="/#" style={{ textDecoration: "none" }}>
+              Try kite demo <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <img
+          src="media\images\pressLogos.png"
+          className="rounded mx-auto d-block "
+          style={{ width: "48%" }}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default Stats;
