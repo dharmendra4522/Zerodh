@@ -1,9 +1,9 @@
 require("dotenv").config();
 
 const Holding = require('./model/HoldingModels');
-const {PositionModels} =require("./models/PositionModels")
-const {OrdersModel} =require("./models/OrderModels");
-const User = require("./models/UserModel");
+const {PositionModels} = require("./model/PositionModels");
+const {OrdersModel} = require("./model/OrderModels");
+const User = require("./model/UserModel");
 const {Login} = require("./controllers/AuthControllers");
 const passport = require("passport");
 const express = require("express");
@@ -29,7 +29,7 @@ const flash = require('connect-flash');
 //   .then(() => console.log("MongoDB is  connected successfully"))
 //   .catch((err) => console.error(err));
 
-const mongodburl = process.env.MONGODB_URL;
+const mongodburl = process.env.MONGO_URL;
 // console.log(mongodburl);
 if (!mongodburl) {
   console.error("Error: MONGO_URI environment variable is not set.");
@@ -43,6 +43,7 @@ mongoose.connect(mongodburl)
 }).catch((err) => {
   console.error("MongoDB connection error:", err);
 });
+
 
   //used after session as passport uses session data so user does not have to login again if opened website
 //on different tabs.
@@ -78,12 +79,12 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URL, // Your MongoDB connection string
+    mongoUrl: process.env.MONGO_URL, // Your MongoDB connection string
     
     collectionName: 'sessions'
   }),
 }));
-console.log("mongourl",process.env.MONGODB_URL);
+// console.log("mongourl",process.env.MONGO_URL);
 // app.use(
 //   session({
 //     secret: process.env.TOKEN_KEY, // Replace with a secure key
@@ -101,7 +102,10 @@ app.use(cookieParser());
 
 app.use(express.json());
 
-app.use("/", authRoute);
+app.use("/api", authRoute);
+
+// app.route("/login").post(Login);
+
 
 app.get("/allHoldings", async(req,res) =>{
      let allHoldings = await Holding.find({});
@@ -109,10 +113,16 @@ app.get("/allHoldings", async(req,res) =>{
      res.json(allHoldings);
 });
 
-app.get("/allPositions", async(req,res) =>{
-  let allPositions = await PositionModels.find({});
-  res.json(allPositions);
-  });
+app.get("/allPositions", async (req, res) => {
+  try {
+    let allPositions = await PositionModels.find({});
+    console.log(allPositions,"all the positions");
+    res.json(allPositions);
+  } catch (error) {
+    console.error("Error fetching positions:", error);
+    res.status(500).json({ error: "Failed to fetch positions" });
+  }
+});
 
 
  app.post('/newOrder', userVerification, async (req, res) => {

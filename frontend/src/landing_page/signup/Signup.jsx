@@ -35,7 +35,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/signup", // Change this API URL if needed
+        "http://localhost:4000/api/signup", // Change this API URL if needed
         {
           ...inputValue,
         },

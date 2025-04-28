@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/login", 
+        "http://localhost:4000/api/login", 
         {
           ...inputValue,
         },
@@ -43,7 +43,7 @@ const Login = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/dashboard");
+          window.location.href = "http://localhost:3001";
         }, 1000);
       } else {
         handleError(message);
@@ -59,12 +59,12 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 ">
       <div className="row align-items-center">
         {/* Image section */}
         <div className="col-md-6 text-center">
           <img
-            src="media/images/login.png" 
+            src="media/images/signup.png" 
             alt="Login"
             className="img-fluid"
             style={{ maxHeight: "400px" }}

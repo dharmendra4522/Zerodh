@@ -3,17 +3,28 @@ import axios from "axios";
 
 const Positions = () => {
   const [allPosition, setAllPosition] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/allPosition").then((res) => {
-      console.log(res.data);
-      setAllPosition(res.data);
-    });
+    const fetchPositions = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/allPositions");
+        console.log(res.data);
+        setAllPosition(res.data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching positions:", err);
+        setError("Failed to fetch positions. Please try again later.");
+      }
+    };
+
+    fetchPositions();
   }, []);
 
   return (
     <>
       <h3 className="title">Positions ({allPosition.length})</h3>
+      {error && <div className="error-message">{error}</div>}
 
       <div className="order-table">
         <table>

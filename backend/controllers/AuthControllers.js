@@ -1,10 +1,12 @@
 const User = require("../model/UserModel");
-const { createSecret } = require("../utils/ScretToken");
+const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcrypt");
 
 module.exports.Signup = async (req, res, next) => {
     try {
         const { email, password, username, createdAt } = req.body;
+
+        console.log("Received data:", req.body);
 
         if (!email || !password || !username) {
             return res.json({ message: 'All fields are required' });
@@ -17,7 +19,7 @@ module.exports.Signup = async (req, res, next) => {
 
         const user = await User.create({ email, password, username, createdAt });
 
-        const token = createSecret(user._id);
+        const token = createSecretToken(user._id);
 
         // Secure cookie handling
         res.cookie("token", token, {
@@ -38,6 +40,8 @@ module.exports.Signup = async (req, res, next) => {
 module.exports.Login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
+
+        console.log("Received data:", req.body);
 
         if (!email || !password) {
             return res.json({ message: 'All fields are required' });
