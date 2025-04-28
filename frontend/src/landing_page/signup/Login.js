@@ -3,15 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-const Signup = () => {
+const Login = () => {
+  const navigate = useNavigate();
+
   const [inputValue, setInputValue] = useState({
     email: "",
-    password: "",
-    username: "",
+    password: ""
   });
-  const { email, password, username } = inputValue;
-
-  const navigate = useNavigate(); // initialize useNavigate hook
+  const { email, password } = inputValue;
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +24,6 @@ const Signup = () => {
     toast.error(err, {
       position: "top-center",
     });
-
   const handleSuccess = (msg) =>
     toast.success(msg, {
       position: "top-center",
@@ -35,7 +33,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/signup", // Change this API URL if needed
+        "http://localhost:5000/api/login", 
         {
           ...inputValue,
         },
@@ -45,19 +43,18 @@ const Signup = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          // Navigate to the dashboard (assuming it's a different app)
-          window.location.href = "http://localhost:3001/home"; // Correct path to your dashboard
+          navigate("/dashboard");
         }, 1000);
       } else {
         handleError(message);
       }
     } catch (error) {
       console.log(error);
+      handleError("Something went wrong. Please try again.");
     }
     setInputValue({
       email: "",
       password: "",
-      username: "",
     });
   };
 
@@ -67,8 +64,8 @@ const Signup = () => {
         {/* Image section */}
         <div className="col-md-6 text-center">
           <img
-            src="media/images/signup.png"
-            alt="Signup"
+            src="media/images/login.png" 
+            alt="Login"
             className="img-fluid"
             style={{ maxHeight: "400px" }}
           />
@@ -77,7 +74,7 @@ const Signup = () => {
         {/* Form section */}
         <div className="col-md-6">
           <div className="p-4">
-            <h2 className="text-center mb-4">Signup to Zerodha</h2>
+            <h2 className="text-center mb-4">Login to Zerodha</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">Email</label>
@@ -87,18 +84,6 @@ const Signup = () => {
                   name="email"
                   value={email}
                   placeholder="Enter your email"
-                  onChange={handleOnChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="username" className="form-label">Username</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="username"
-                  value={username}
-                  placeholder="Enter your username"
                   onChange={handleOnChange}
                   required
                 />
@@ -115,11 +100,13 @@ const Signup = () => {
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary w-100">Submit</button>
+              <button type="submit" className="btn btn-primary w-100">Login</button>
             </form>
             <div className="mt-3 text-center">
-              Already have an account?{" "}
-              <Link to="/login" style={{ textDecoration: "none" }}>Login</Link>
+              Don't have an account?{" "}
+              <Link to="/signup" style={{ textDecoration: "none" }}>
+                Signup
+              </Link>
             </div>
           </div>
         </div>
@@ -130,4 +117,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { HoldingModels } = require("./models/HoldingModels");
+const Holding = require('./model/HoldingModels');
 const {PositionModels} =require("./models/PositionModels")
 const {OrdersModel} =require("./models/OrderModels");
 const User = require("./models/UserModel");
@@ -104,7 +104,7 @@ app.use(express.json());
 app.use("/", authRoute);
 
 app.get("/allHoldings", async(req,res) =>{
-     let allHoldings = await HoldingModels.find({});
+     let allHoldings = await Holding.find({});
     //  console.log(allHoldings);
      res.json(allHoldings);
 });
