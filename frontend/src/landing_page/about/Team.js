@@ -13,14 +13,14 @@ function Team() {
         
       >
      
-        <div className="col-5 text-center">
+        <div className="col-5 text-center ">
           <img
-            src="media\images\nithinKamath.jpg"
+            src="media\images/me.jpeg"
             alt="team "
-            style={{ borderRadius: "100%", width: "60%" }}
+            style={{ borderRadius: "100%", width: "60%", height:"300px" }}
           />
-          <h5>Nithin Kamath</h5>
-          <p>Founder, CEO</p>
+          <h5>Dharmendra Vishvkarma</h5>
+          <p>Developer</p>
 
                </div>
 
@@ -34,7 +34,7 @@ function Team() {
             <p>He
             is a member of the SEBI Secondary Market Advisory Committee (SMAC)
             and the Market Data Advisory Committee (MDAC).</p> <p> Playing basketball is
-            his zen.</p>  <p>Connect on <a href="/"> Homepage</a>  / <a href="/"> TradingQnA</a> /<a href="/"> Twitter</a>
+            his zen.</p>  <p>Connect on <a href="/" style={{textDecoration:"none"}}> Homepage</a>  / <a href="/" style={{textDecoration:"none"}}> TradingQnA</a> /<a href="/" style={{textDecoration:"none"}}> Twitter</a>
           </p>
         
         </div>

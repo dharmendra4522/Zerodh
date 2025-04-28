@@ -45,17 +45,17 @@ function Hero() {
             traders and investors.
           </p>
           <p>
-            <a href="/"> Rainmatter </a>, our fintech fund and incubator, has
+            <a href="/" style={{textDecoration:"none"}}> Rainmatter </a>, our fintech fund and incubator, has
             invested <br /> in several fintech startups with the goal of growing
             the <br /> Indian capital markets.
           </p>
           <p>
             And yet, we are always up to something new every day.
-            <br /> Catch up on the latest updates on our <a href="/">
+            <br /> Catch up on the latest updates on our <a href="/" style={{textDecoration:"none"}}>
               {" "}
               blog{" "}
             </a>{" "}
-            or see what <br /> the media is <a href="/"> Saying about us. </a>
+            or see what <br /> the media is <a href="/" style={{textDecoration:"none"}}> Saying about us. </a>
           </p>
         </div>
       </div>
