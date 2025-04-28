@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Summary = () => {
+  const { user } = useContext(UserContext);
+  console.log('Summary component - User context:', user);
+
   return (
     <>
       <div className="username">
-        <h6>Hi, User!</h6>
+        <h6>Hi, {user?.username || 'User'}!</h6>
         <hr className="divider" />
       </div>
 
