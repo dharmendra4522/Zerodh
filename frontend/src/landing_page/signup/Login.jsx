@@ -59,7 +59,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-5 ">
+    <div className="container mt-5 pt-5 pb-3">
       <div className="row align-items-center">
         {/* Image section */}
         <div className="col-md-6 text-center">
@@ -73,7 +73,7 @@ const Login = () => {
 
         {/* Form section */}
         <div className="col-md-6">
-          <div className="p-4">
+          <div className="shadow-lg p-3 mb-5 bg-white rounded">
             <h2 className="text-center mb-4">Login to Zerodha</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">

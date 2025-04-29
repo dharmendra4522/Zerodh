@@ -3,7 +3,7 @@ import React from "react";
 function Hero() {
   return (
     <section
-      className="container-fluid mt-5"
+      className="container-fluid mt-5 pt-5 pb-3"
       style={{ backgroundColor: "#387ed1", height: "470px" }}
     >
       <div className="p-5  " id="supperHeroWrapper">

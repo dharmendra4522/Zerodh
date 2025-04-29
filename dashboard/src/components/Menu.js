@@ -10,6 +10,11 @@ const Menu = () => {
     setSelectedMenu(index);
   };
 
+  // const Logout = () => {
+  //   removeCookie("token");
+  //   window.location.href = "/Login";
+  // }
+
   const handleProfileClick = (index) => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
@@ -93,6 +98,7 @@ const Menu = () => {
         <div className="profile" onClick={handleProfileClick}>
           <div className="avatar">ZU</div>
           <p className="username">USERID</p>
+          {/* <button onClick={handleLogout}>Logout</button> */}
           <Link
             style={{ textDecoration: "none" }}
             to="/Login"/>

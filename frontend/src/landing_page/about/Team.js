@@ -10,38 +10,33 @@ function Team() {
       </div>
       <div
         className="row   p-5 "
-        
+
       >
-     
+
         <div className="col-5 text-center ">
           <img
-            src="media\images/me.jpeg"
+            src="media/images/me.jpeg"
             alt="team "
-            style={{ borderRadius: "100%", width: "60%", height:"300px" }}
+            style={{ borderRadius: "100%", width: "60%", height: "300px" }}
           />
           <h5>Dharmendra Vishvkarma</h5>
           <p>Developer</p>
 
-               </div>
+        </div>
 
-       
+
         <div className="col-5 mt-3 fs-6 teamhistory" >
           <p>
-            Nithin bootstrapped and founded Zerodha in 2010 to overcome the
-
-            hurdles he faced during his decade long stint as a trader. Today,
-            Zerodha has changed the landscape of the Indian broking industry.</p>
-            <p>He
-            is a member of the SEBI Secondary Market Advisory Committee (SMAC)
-            and the Market Data Advisory Committee (MDAC).</p> <p> Playing basketball is
-            his zen.</p>  <p>Connect on <a href="/" style={{textDecoration:"none"}}> Homepage</a>  / <a href="/" style={{textDecoration:"none"}}> TradingQnA</a> /<a href="/" style={{textDecoration:"none"}}> Twitter</a>
+            I’m the developer of this website and currently pursuing a B.Tech in Information Technology at AKGEC (Ajay Kumar Garg Engineering College), Ghaziabad.</p>
+          <p> I'm passionate about web development and love building responsive, user-friendly applications that solve real-world problems. Beyond coding.</p> <p> I enjoy playing cricket—it’s my go-to for fun and focus.</p>
+          <p>Connect on <a href="/" style={{ textDecoration: "none" }}> Homepage</a>  / <a href="/" style={{ textDecoration: "none" }}> TradingQnA</a> /<a href="/" style={{ textDecoration: "none" }}> Twitter</a>
           </p>
-        
+
         </div>
- 
+
       </div>
-      </div>
-        
+    </div>
+
   );
 }
 
