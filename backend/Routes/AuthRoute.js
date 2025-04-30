@@ -1,4 +1,4 @@
-const { Signup, Login } = require("../controllers/AuthControllers");
+const { Signup, Login, Logout } = require("../controllers/AuthControllers");
 const { Holding } = require("../controllers/Holding");
 const router = require("express").Router();
 const {userVerification } = require("../middlewares/AuthMiddleware");
@@ -6,6 +6,7 @@ const User = require("../model/UserModel");
 
 router.post("/signup", Signup);
 router.post("/login", Login);
+router.post("/logout", userVerification, Logout);
 router.get("/", userVerification, async (req, res) =>{
     try {
         console.log('Fetching user data for ID:', req.userId);

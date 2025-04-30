@@ -1,21 +1,54 @@
-import React, { useState } from "react";
-
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
   };
 
-  // const Logout = () => {
-  //   removeCookie("token");
-  //   window.location.href = "/Login";
-  // }
+  const handleLogout = async () => {
+    try {
+      // Call backend logout endpoint to clear the token
+      await axios.post("http://localhost:4000/api/logout", {}, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
 
-  const handleProfileClick = (index) => {
+      // Clear local storage
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      
+      // Clear user context
+      setUser(null);
+      
+      // Show success message
+      toast.success("Logged out successfully");
+      
+      // Redirect to frontend login page
+      window.location.href = "http://localhost:3000/login";
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("Error during logout. Please try again.");
+      
+      // Still clear local data even if server request fails
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      setUser(null);
+      window.location.href = "http://localhost:3000/login";
+    }
+  };
+
+  const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
@@ -24,7 +57,7 @@ const Menu = () => {
 
   return (
     <div className="menu-container">
-      <img src="logo.png" style={{ width: "50px" }} />
+      <img src="logo.png" alt="Zerodha Logo" style={{ width: "50px" }} />
       <div className="menus">
         <ul>
           <li>
@@ -96,20 +129,18 @@ const Menu = () => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
-          {/* <button onClick={handleLogout}>Logout</button> */}
-          <Link
+          {/* <div className="avatar">ZU</div>
+          <p className="username">USERID</p> */}
+          <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+          {/* <Link
             style={{ textDecoration: "none" }}
-            to="/Login"/>
-          
+            to="/Login">
+            Login
+          </Link> */}
         </div>
       </div>
     </div>
   );
 };
-
-
-
 
 export default Menu;

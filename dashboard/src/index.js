@@ -3,33 +3,21 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Home from "./components/Home.js";
-import Login from "./components/Login.jsx";
-
-import 'react-toastify/ReactToastify.css' 
-
-
+import { UserProvider } from "./context/UserContext.js";
+import 'react-toastify/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <FlashMessageProvider>
-    // <BrowserRouter>
-    //   <Routes>
-    //   <Route path="/login" element={<Login />} />
-    //     <Route path="/*" element={<Home />} />
-    //   </Routes>
-    // </BrowserRouter>
+  <UserProvider>
     <BrowserRouter
-    future={{
-      v7_startTransition: true,
-      v7_relativeSplatPath: true, 
-    }}
-  >
-    <Routes>
-     
-      {/* <Route index element={<Home />} /> */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/*" element={<Home />} />
-    </Routes>
-  </BrowserRouter>
-    /* </FlashMessageProvider> */
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
+      <Routes>
+        <Route path="/*" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  </UserProvider>
 );

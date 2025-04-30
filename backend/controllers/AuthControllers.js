@@ -2,7 +2,7 @@ const User = require("../model/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcrypt");
 
-module.exports.Signup = async (req, res, next) => {
+const Signup = async (req, res, next) => {
     try {
         const { email, password, username, createdAt } = req.body;
 
@@ -37,7 +37,7 @@ module.exports.Signup = async (req, res, next) => {
     }
 };
 
-module.exports.Login = async (req, res, next) => {
+const Login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
@@ -75,3 +75,22 @@ module.exports.Login = async (req, res, next) => {
         res.status(500).json({ message: "Error during login", success: false });
     }
 };
+
+const Logout = async (req, res) => {
+    try {
+        // Clear the token from the client's cookies
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        });
+
+        // Send success response
+        res.json({ status: true, message: "Logged out successfully" });
+    } catch (error) {
+        console.error("Logout error:", error);
+        res.status(500).json({ status: false, message: "Error during logout" });
+    }
+};
+
+module.exports = { Signup, Login, Logout };

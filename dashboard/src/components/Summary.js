@@ -3,14 +3,35 @@ import { UserContext } from "../context/UserContext";
 
 const Summary = () => {
   const { user } = useContext(UserContext);
-  console.log('Summary component - User context:', user);
+
+  console.log("Summary - User context:", user);
+  console.log("Summary - localStorage user:", localStorage.getItem('user'));
+
+  const getDisplayName = () => {
+    try {
+      // First try to get from context
+      if (user?.username) return user.username;
+      if (user?.name) return user.name;
+
+      // Then try to get from localStorage
+      const savedUser = localStorage.getItem('user');
+      if (savedUser) {
+        const parsedUser = JSON.parse(savedUser);
+        if (parsedUser?.username) return parsedUser.username;
+        if (parsedUser?.name) return parsedUser.name;
+      }
+
+      return 'User';
+    } catch (error) {
+      console.error("Error getting display name:", error);
+      return 'User';
+    }
+  };
 
   return (
-    <>
-      <div className="username">
-        <h6>Hi, {user?.username || 'User'}!</h6>
-        <hr className="divider" />
-      </div>
+    <div className="summary-container">
+      <h2>Hi {getDisplayName()}</h2>
+      <hr className="divider" />
 
       <div className="section">
         <span>
@@ -61,7 +82,7 @@ const Summary = () => {
         </div>
         <hr className="divider" />
       </div>
-    </>
+    </div>
   );
 };
 
