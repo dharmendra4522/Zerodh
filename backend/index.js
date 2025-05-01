@@ -19,6 +19,7 @@ const { WatchlistUser } = require("./middlewares/watchlist");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
+const jwt = require("jsonwebtoken");
 
 
 // mongoose
@@ -107,7 +108,7 @@ app.use("/api", authRoute);
 // app.route("/login").post(Login);
 
 
-app.get("/allHoldings", async(req,res) =>{
+app.get("/allHoldings" ,async(req,res) =>{
      let allHoldings = await Holding.find({});
     //  console.log(allHoldings);
      res.json(allHoldings);
@@ -206,6 +207,30 @@ app.delete('/allorders/:id', async (req, res) => {
     res.status(500).json({ message: 'Error deleting order', error });
   }
 });
+
+// creating an api to get the token for the dashboard to verify the user in the frontend of the dashboard...
+// only fetching the token from the backend get request
+
+app.get("/getToken", async (req, res, next) => {
+  const token = req.cookies.token;
+  console.log("Token received:", token);
+
+  if (!token) {
+    return res.status(401).json({ status: false, message: "No token provided" });
+  }
+
+  // Verifying token
+  jwt.verify(token, process.env.TOKEN_KEY, async (err, decoded) => {
+    if (err) {
+      console.error("JWT verification failed:", err);
+      return res.status(403).json({ status: false, message: "Invalid or expired token" });
+    }
+
+    // If verification succeeds
+    res.status(200).json({ status: true, message: "Token is valid", token });
+  });
+});
+
 
 // const express = require("express");
 // const app= express();

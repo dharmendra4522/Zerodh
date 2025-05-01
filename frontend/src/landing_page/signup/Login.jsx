@@ -39,9 +39,10 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      const { success, message } = data;
+      const { success, message , token } = data;
       if (success) {
         handleSuccess(message);
+        localStorage.setItem("token", token);
         setTimeout(() => {
           window.location.href = "http://localhost:3001";
         }, 1000);

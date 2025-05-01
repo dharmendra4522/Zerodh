@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Apps from "./Apps";
@@ -11,8 +11,13 @@ import Summary from "./Summary";
 import WatchList from "./WatchList";
 import { GeneralContextProvider } from "./GeneralContext";
 import { UserProvider } from "../context/UserContext";
+import { validateToken } from "./verification";
 
 const Dashboard = () => {
+
+  useEffect(() => {
+    validateToken();
+  },[])
   return (
     <div className="dashboard-container">
       <UserProvider>
