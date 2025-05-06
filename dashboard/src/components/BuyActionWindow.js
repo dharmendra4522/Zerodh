@@ -9,12 +9,20 @@ const BuyActionWindow = ({ uid }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
 
   const handleBuyClick = () => {
+
+    if (stockPrice === 0) {
+      alert("Please enter a valid price.");
+      return;
+    }
+
     axios.post("http://localhost:4000/newOrder", {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
       mode: "BUY",
-    });
+    },
+    { withCredentials: true }
+  );
 
     closeBuyWindow();
   };

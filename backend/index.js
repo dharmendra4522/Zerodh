@@ -88,7 +88,7 @@ app.use(session({
 // console.log("mongourl",process.env.MONGO_URL);
 // app.use(
 //   session({
-//     secret: process.env.TOKEN_KEY, // Replace with a secure key
+//     secret: process.env.JWT_SECRET, // Replace with a secure key
 //     resave: false,
 //     saveUninitialized: true,
 //   })
@@ -212,6 +212,7 @@ app.delete('/allorders/:id', async (req, res) => {
 // only fetching the token from the backend get request
 
 app.get("/getToken", async (req, res, next) => {
+  
   const token = req.cookies.token;
   console.log("Token received:", token);
 

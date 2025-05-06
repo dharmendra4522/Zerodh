@@ -48,6 +48,7 @@ export const UserProvider = ({ children }) => {
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
+        setUser(null);
       }
     };
 
