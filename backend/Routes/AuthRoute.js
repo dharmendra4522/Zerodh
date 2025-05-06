@@ -11,7 +11,8 @@ router.get("/", userVerification, async (req, res) =>{
     try {
         console.log('Fetching user data for ID:', req.userId);
         const user = await User.findById(req.userId);
-        console.log('Found user:', user);
+        console.log(
+            'Found user:', user);
         
         if (!user) {
             console.log('User not found');

@@ -1,6 +1,8 @@
 const User = require("../model/UserModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+//new
+const SECRET = process.env.JWT_SECRET;
 
 module.exports.userVerification = async (req, res, next) => {
   const token = req.cookies.token;
@@ -11,7 +13,7 @@ module.exports.userVerification = async (req, res, next) => {
   }
 
   // Verifying token
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       console.error("JWT verification failed:", err);
       return res.status(403).json({ status: false, message: "Invalid or expired token" });

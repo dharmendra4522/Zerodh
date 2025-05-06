@@ -76,7 +76,7 @@ app.use(
 
 // Session middleware
 app.use(session({
-  secret: process.env.TOKEN_KEY,
+  secret: process.env.JWT_SECRET,
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
@@ -127,7 +127,7 @@ app.get("/allPositions", async (req, res) => {
 
 
  app.post('/newOrder', userVerification, async (req, res) => {
-    console.log("User ID from middleware:", req.userId); // Debugging
+    console.log("User ID from middleware:", req.user); // Debugging
     const { name, qty, price, mode } = req.body;
 
   
@@ -220,7 +220,7 @@ app.get("/getToken", async (req, res, next) => {
   }
 
   // Verifying token
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       console.error("JWT verification failed:", err);
       return res.status(403).json({ status: false, message: "Invalid or expired token" });
@@ -235,14 +235,7 @@ app.get("/getToken", async (req, res, next) => {
 // const express = require("express");
 // const app= express();
 
-
-
-
-
-
-
 // // mongo db url
-
 
 // // app.get("/addHoldings",(req,res)=>{
 // //     const tempHolding = [
