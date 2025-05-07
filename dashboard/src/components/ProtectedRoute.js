@@ -1,55 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import axios from 'axios';
 
 const ProtectedRoute = ({ children }) => {
-  const { user, setUser } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    const verifyToken = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          setIsLoading(false);
-          navigate('/login');
-          return;
-        }
+    if (!token || !user) {
+      // Use navigate instead of window.location for smoother transition
+      navigate('/login', { replace: true });
+    }
+  }, [token, user, navigate]);
 
-        const response = await axios.get('http://localhost:4000/api/verify-token', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        if (!response.data.status) {
-          localStorage.removeItem('token');
-          setUser(null);
-          setIsLoading(false);
-          navigate('/login');
-        } else {
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error('Auth error:', error);
-        localStorage.removeItem('token');
-        setUser(null);
-        setIsLoading(false);
-        navigate('/login');
-      }
-    };
-
-    verifyToken();
-  }, [setUser, navigate]);
-
-  if (isLoading) {
+  // Show loading state while checking authentication
+  if (!token || !user) {
     return <div>Loading...</div>;
-  }
-
-  if (!user) {
-    return <Navigate to="/login" replace />;
   }
 
   return children;

@@ -5,45 +5,55 @@ const jwt = require("jsonwebtoken");
 const SECRET = process.env.JWT_SECRET;
 
 module.exports.userVerification = async (req, res, next) => {
-  const token = req.cookies.token;
+  try {
+    // Get token from Authorization header
+    const authHeader = req.headers.authorization;
+    console.log("Auth header:", authHeader);
 
-  console.log("Token received:", token);
-
-  if (!token) {
-    return res.status(401).json({ status: false, message: "No token provided" });
-  }
-  console.log("Value of process.env.JWT_SECRET:", process.env.JWT_SECRET);
-
-  // Verifying token
-  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-    if (err) {
-      // console.error("JWT verification failed:", err);
-      console.error("JWT verification failed:", err);
-        console.error("Error name:", err.name);
-        console.error("Error message:", err.message);
-        console.error("Error stack:", err.stack);
-        console.log("Attempted decoded token (even though there was an error):", decoded); // Log the decoded object even if there was an error
-      return res.status(403).json({ status: false, message: "Invalid or expired token" });
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      console.log("Invalid or missing Authorization header");
+      return res.status(401).json({ 
+        status: false, 
+        message: "Invalid authorization header" 
+      });
     }
 
+    const token = authHeader.split(' ')[1];
+    console.log("Token extracted:", token);
+
+    if (!token) {
+      console.log("No token provided");
+      return res.status(401).json({ 
+        status: false, 
+        message: "No token provided" 
+      });
+    }
+
+    // Verifying token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log("Decoded token:", decoded);
 
-    try {
-      const user = await User.findById(decoded.id);
-      // console.log("Current User:", user);
-      console.log("Current User:", !!user);
+    const user = await User.findById(decoded.id);
+    console.log("User found:", !!user);
 
-      if (!user) {
-        return res.status(404).json({ status: false, message: "User not found" });
-      }
-
-      req.userId = user._id;
-      req.username = user.username;
-
-      next(); // Proceed to the next middleware
-    } catch (error) {
-      console.error("Error finding user:", error);
-      return res.status(500).json({ status: false, message: "Server error" });
+    if (!user) {
+      console.log("User not found");
+      return res.status(404).json({ 
+        status: false, 
+        message: "User not found" 
+      });
     }
-  });
+
+    // Attach user info to request
+    req.userId = user._id;
+    req.username = user.username;
+
+    next();
+  } catch (error) {
+    console.error("JWT verification failed:", error);
+    return res.status(403).json({ 
+      status: false, 
+      message: "Invalid or expired token" 
+    });
+  }
 };

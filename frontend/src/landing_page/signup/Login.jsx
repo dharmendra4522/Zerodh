@@ -32,26 +32,42 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Attempting login with:", { email });
       const { data } = await axios.post(
         "http://localhost:4000/api/login", 
         {
           ...inputValue,
         },
-        { withCredentials: true }
+        { 
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
       );
-      const { success, message , token } = data;
-      if (success) {
-        handleSuccess(message);
-        localStorage.setItem("token", token);
-        setTimeout(() => {
-          window.location.href = "http://localhost:3001";
-        }, 1000);
+      console.log("Login response:", data);
+
+      if (data.success) {
+        handleSuccess(data.message);
+        // Store token in localStorage
+        localStorage.setItem("token", data.token);
+        // Store user data in localStorage
+        localStorage.setItem("user", JSON.stringify(data.user));
+        console.log("Stored user data:", data.user);
+        
+        // Wait for a moment to ensure data is stored
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Redirect to dashboard application
+        window.location.href = "http://localhost:3001";
       } else {
-        handleError(message);
+        handleError(data.message || "Login failed");
       }
     } catch (error) {
-      console.log(error);
-      handleError("Something went wrong. Please try again.");
+      console.error("Login error:", error);
+      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again.";
+      handleError(errorMessage);
     }
     setInputValue({
       email: "",

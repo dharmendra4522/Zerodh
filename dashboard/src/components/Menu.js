@@ -16,35 +16,47 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      // Call backend logout endpoint to clear the token
-      await axios.post("http://localhost:4000/api/logout", {}, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("No token found in localStorage");
+            // Still clear local data and redirect
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            setUser(null);
+            window.location.href = "http://localhost:3000/login";
+            return;
         }
-      });
 
-      // Clear local storage
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      
-      // Clear user context
-      setUser(null);
-      
-      // Show success message
-      toast.success("Logged out successfully");
-      
-      // Redirect to frontend login page
-      window.location.href = "http://localhost:3000/login";
+        console.log("Attempting logout with token:", token);
+
+        // Call backend logout endpoint to clear the token
+        const response = await axios.post("http://localhost:4000/api/logout", {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true // Important for cookie handling
+        });
+
+        console.log("Logout response:", response.data);
+
+        // Clear all local storage
+        localStorage.clear();
+        
+        // Clear user context
+        setUser(null);
+        
+        // Show success message
+        toast.success("Logged out successfully");
+        
+        // Force reload to clear any cached data
+        window.location.href = "http://localhost:3000/login";
     } catch (error) {
-      console.error("Logout error:", error);
-      toast.error("Error during logout. Please try again.");
-      
-      // Still clear local data even if server request fails
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      setUser(null);
-      window.location.href = "http://localhost:3000/login";
+        console.error("Logout error:", error);
+        // Still clear everything even if server request fails
+        localStorage.clear();
+        setUser(null);
+        window.location.href = "http://localhost:3000/login";
     }
   };
 
@@ -57,7 +69,11 @@ const Menu = () => {
 
   return (
     <div className="menu-container">
-      <img src="logo.png" alt="Zerodha Logo" style={{ width: "50px" }} />
+      <img 
+        src={process.env.PUBLIC_URL + '/logo.png'} 
+        alt="Zerodha Logo" 
+        style={{ width: "50px", height: "auto" }} 
+      />
       <div className="menus">
         <ul>
           <li>

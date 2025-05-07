@@ -1,36 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
+import { FlashMessageContext } from './FlashMessageContext';
+import { useNavigate } from 'react-router-dom';
 
 const Summary = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const { flashMessage } = useContext(FlashMessageContext);
+  const navigate = useNavigate();
 
-  console.log("Summary - User context:", user);
-  console.log("Summary - localStorage user:", localStorage.getItem('user'));
+  useEffect(() => {
+    console.log("Current user context:", user);
+    console.log("Local storage user:", localStorage.getItem('user'));
+  }, [user]);
 
-  // const getDisplayName = () => {
-  //   try {
-  //     // First try to get from context
-  //     if (user?.username) return user.username;
-  //     if (user?.name) return user.name;
-
-  //     // Then try to get from localStorage
-  //     const savedUser = localStorage.getItem('user');
-  //     if (savedUser) {
-  //       const parsedUser = JSON.parse(savedUser);
-  //       if (parsedUser?.username) return parsedUser.username;
-  //       if (parsedUser?.name) return parsedUser.name;
-  //     }
-
-  //     return 'User';
-  //   } catch (error) {
-  //     console.error("Error getting display name:", error);
-  //     return 'User';
-  //   }
-  // };
+  const getDisplayName = () => {
+    if (user?.username) {
+      console.log("Using username from context:", user.username);
+      return user.username;
+    }
+    try {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        console.log("Using username from localStorage:", parsedUser.username);
+        return parsedUser.username;
+      }
+    } catch (error) {
+      console.error("Error parsing user from localStorage:", error);
+    }
+    console.log("No username found, using default");
+    return 'User';
+  };
 
   return (
     <div className="summary-container">
-      <h2>Hi {user?.username || 'User'}!</h2>
+      <div className="summary-header">
+        <h2>Hi {getDisplayName()}!</h2>
+      </div>
       <hr className="divider" />
 
       <div className="section">
